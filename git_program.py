@@ -1,18 +1,20 @@
 import sys
 import random
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton
 from PyQt5 import uic
 
 
 class Example(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Круг.ui', self)
         self.initUI()
 
     def initUI(self):
+        self.setGeometry(300, 300, 500, 500)
         self.setWindowTitle('круг')
+        self.pbt = QPushButton('Круг', self)
+        self.pbt.move(150, 150)
         self.pbt.clicked.connect(self.push_flag)
         self.flag = False
 
@@ -24,7 +26,8 @@ class Example(QMainWindow):
             qp.end()
 
     def draw_elips(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+        qp.setBrush(QColor(r, g, b))
         hw = random.randint(50, 300)
         x = random.randint(0, 400)
         y = random.randint(0, 400)
